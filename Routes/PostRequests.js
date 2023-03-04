@@ -47,7 +47,9 @@ postRouter.post('/add-new-room', ( req, res ) => {
         room_description: req.body.room_description,
         room_features: req.body.room_features,
         room_latitude_coordinate: req.body.room_latitude_coordinate.trim(),
-        room_longitude_coordinate: req.body.room_longitude_coordinate.trim()
+        room_longitude_coordinate: req.body.room_longitude_coordinate.trim(),
+        room_rating: req.body.room_rating.trim(),
+        room_location: req.body.room_location.trim()
     })
 
     newRoom.save(( err, room ) => {

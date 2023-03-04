@@ -30,6 +30,18 @@ const RoomSchema = new Schema({
         unique: false
     },
 
+    room_rating: {
+        type: Number,
+        required: true,
+        unique: false
+    },
+
+    room_location: {
+        type: String,
+        required: true,
+        unique: false
+    },
+
     room_cover_photo_url: {
         type: String,
         required: true
