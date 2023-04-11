@@ -74,9 +74,8 @@ getRouter.get('/room-details/:room_id', ( req, res ) => {
 getRouter.get('/search-room/:search_text', ( req, res ) => {
     Room_Model.find({ $or: [ { room_number: req.params.search_text }, 
                              { room_rate: req.params.search_text },
-                             { room_availability: req.params.search_text },
-                             { room_category: req.params.search_text },
-                             { room_description: req.params.search_text }
+                             { room_location: req.params.search_text },
+                             { room_category: req.params.search_text }
                            ] 
                     }, 
                    ( err, rooms ) => {
