@@ -39,7 +39,7 @@ getRouter.get('/fetch-all-rooms', ( req, res ) => {
                 res.status(200).json( rooms )
             }
             else {
-                res.status(200).json('sorry, no rooms added yet....')
+                res.status(200).json('sorry, no rooms added yet............')
             }
         }
     })
