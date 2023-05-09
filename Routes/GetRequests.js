@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const getRouter = express.Router()
-const { Room_Model, Employee_Model, Booking_Model } = require('../DB/schema.js')
+const { Room_Model, Employee_Model, Booking_Model, Review_Model } = require('../DB/schema.js')
 
 
 
@@ -26,8 +26,6 @@ const CapitalizeAllLetters = ( word ) => {
 
 
 
-
-
 // the get requests.
 // fetching all rooms
 getRouter.get('/fetch-all-rooms', ( req, res ) => {
@@ -39,7 +37,7 @@ getRouter.get('/fetch-all-rooms', ( req, res ) => {
                 res.status(200).json( rooms )
             }
             else {
-                res.status(200).json('sorry, no rooms added yet............')
+                res.status(500).json('sorry, no rooms added yet............')
             }
         }
     })
@@ -50,16 +48,16 @@ getRouter.get('/fetch-all-rooms', ( req, res ) => {
 
 
 // fetching room details.
-getRouter.get('/room-details/:room_id', ( req, res ) => {
-    Room_Model.findById( req.params.room_id, ( err, room ) => {
+getRouter.get('/room-details/:hotel_name/:hotel_id', ( req, res ) => {
+    Room_Model.findById( req.params.hotel_id, ( err, hotel ) => {
         if ( err ) 
-            res.status(500).json(`sorry an error occurred, ${ err }`)
+            res.status(400).json(`sorry an error occurred, ${ err }`)
         else {
-            if ( room ) {
-                res.status( 200 ).json( room )
+            if ( hotel ) {
+                res.status( 200 ).json( hotel )
             }
             else {
-                res.status(404).json('no matching room found....')
+                res.status(500).json('no matching hotel found....')
             }
         }
     } )
@@ -199,6 +197,22 @@ getRouter.get('/fetch-unique-guest/:booker_full_name', ( req, res ) => {
 
 
 
+// fetching all reviews on a hotel.
+getRouter.get('/fetch-reviews/:hotel_name/:hotel_id', ( req, res ) => {
+    Review_Model.find({ reviewed_hotel_name: req.params.hotel_name }, '', ( err, reviews ) => {
+        if ( err ) {
+            res.status( 400 ).json('failed to fetch reviews due to error')
+        }
+        else {
+            if ( reviews.length < 1 ) {
+                res.status( 404 ).json('no reviews on this hotel yet')
+            }
+            else {
+                res.status( 200 ).json( reviews )
+            }
+        }
+    })
+})
 
 
 

@@ -165,6 +165,45 @@ const BookingSchema = new Schema({
 
 
 
+// the reviews schema.
+const ReviewSchema = new Schema({
+
+    user_email: {
+        type: String,
+        required: true
+    },
+
+    review_body: {
+        type: String,
+        required: true
+    },
+
+    review_date: {
+        type: String,
+        required: true
+    },
+
+    review_time: {
+        type: String,
+        required: true
+    },
+
+    reviewed_hotel_name: {
+        type: String,
+        required: true
+    },
+
+    reviewed_hotel_id: {
+        type: String,
+        required: true
+    }
+    
+}, { timestamps: true, strict: true } )
+
+
+
+
+
 // models for both schemas.
 const Room_Model = mongoose.model( 'Room Model', RoomSchema )
 
@@ -172,10 +211,13 @@ const Employee_Model = mongoose.model( 'Employee Model', EmployeeSchema )
 
 const Booking_Model = mongoose.model('Booking Model', BookingSchema)
 
+const Review_Model = mongoose.model('Review Model', ReviewSchema )
+
 
 // exporting the modules.
 module.exports = {
     Room_Model,
     Employee_Model,
-    Booking_Model
+    Booking_Model,
+    Review_Model
 }

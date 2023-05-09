@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const postRouter = express.Router()
-const { Room_Model, Employee_Model, Booking_Model } = require('../DB/schema.js')
+const { Room_Model, Employee_Model, Booking_Model, Review_Model } = require('../DB/schema.js')
 
 // supabase.
 const supabase = require('../DB/supabase.js')
@@ -26,6 +26,41 @@ const CapitalizeAllLetters = ( word ) => {
 
 }
 
+
+
+// function to manipulate review date and time and return desired formats.
+const DesiredReviewDate = ( ) => {
+    let date = new Date()
+
+    // dd/mm/yyyy
+    let day = date.getDate()
+    let month = date.getMonth() + 1
+    let year = date.getFullYear()
+
+    day = day.toString().padStart( 2, '0' )
+    month = month.toString().padStart( 2, '0' )
+    
+    let desired_review_date = day + '/' + month + '/' + year
+
+    return desired_review_date
+
+}
+
+
+const DesiredReviewTime = ( ) => {
+    let date = new Date()
+
+    //hh/mm
+    let hours = date.getHours()
+    let minutes = date.getMinutes()
+
+    hours = hours.toString().padStart( 2, 0 )
+    minutes = minutes.toString().padStart( 2, 0 )
+
+    let desired_review_time = hours + ':' + minutes
+
+    return desired_review_time
+}
 
 
 
@@ -104,6 +139,29 @@ postRouter.post('/bookings/:room_id', ( req, res ) => {
         }
     } )
     
+})
+
+
+
+// the reviews function.
+postRouter.post('/post-review/:hotel_name/:hotel_id', ( req, res ) => {
+    let review = new Review_Model({
+        user_email: req.body.user_email,
+        review_body: req.body.review_body,
+        review_date: DesiredReviewDate(),
+        review_time: DesiredReviewTime(),
+        reviewed_hotel_name: req.params.hotel_name,
+        reviewed_hotel_id: req.params.hotel_id
+    })
+
+    review.save(( err, review ) => {
+        if ( err ) {
+            res.status( 400 ).json(`failed to submit review due to an error: ${ err }`)
+        }
+        else {
+            res.status( 200 ).json( review )
+        }
+    })
 })
 
 
