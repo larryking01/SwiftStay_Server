@@ -208,6 +208,7 @@ getRouter.get('/fetch-reviews/:hotel_name/:hotel_id', ( req, res ) => {
                 res.status( 404 ).json('no reviews on this hotel yet')
             }
             else {
+                console.log('reviews fetched')
                 res.status( 200 ).json( reviews )
             }
         }
