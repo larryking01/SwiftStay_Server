@@ -7,6 +7,15 @@ const { Room_Model, Employee_Model, Booking_Model, Review_Model } = require('../
 const supabase = require('../DB/supabase.js')
 
 
+
+
+// function to capitalize all letters.
+const CapitalizeAllLetters = ( word ) => {
+    return word.toUpperCase()
+
+}
+
+
 // function to capitalize first letter of each word.
 // const CapitalizeFirstLetterOfEachWord = ( word ) => {
 //     let separateWords = word.split(' ')
@@ -19,12 +28,6 @@ const supabase = require('../DB/supabase.js')
 
 // }
 
-
-// function to capitalize all letters.
-const CapitalizeAllLetters = ( word ) => {
-    return word.toUpperCase()
-
-}
 
 
 
@@ -165,6 +168,7 @@ postRouter.post('/post-review/:hotel_name/:hotel_id', ( req, res ) => {
 })
 
 
+module.exports = postRouter;
 
 
-module.exports = postRouter
+
