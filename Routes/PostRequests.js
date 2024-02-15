@@ -1,10 +1,11 @@
 const express = require('express')
-const app = express()
+// const app = express()
+// const stripe = require('stripe')('sk_test_51OhbpKDupJ0mnkmyNhkUSgPHz1qQLU426z0wKXvFvLLHXgdlLWeR9qoDfJd5pWOcwsuM3qOk8BKoTjmytbSBFqGx00SJuOiCfe')
 const postRouter = express.Router()
-const { Room_Model, Employee_Model, Booking_Model, Review_Model } = require('../DB/schema.js')
+const { Room_Model, Booking_Model, Review_Model } = require('../DB/schema.js')
 
 // supabase.
-const supabase = require('../DB/supabase.js')
+// const supabase = require('../DB/supabase.js')
 
 
 
@@ -166,6 +167,34 @@ postRouter.post('/post-review/:hotel_name/:hotel_id', ( req, res ) => {
         }
     })
 })
+
+
+// the checkout session.
+// postRouter.post('/checkout', async ( req, res ) => {
+//     const session = await stripe.checkout.sessions.create({
+//         mode: 'payment',
+//         success_url: 'http://localhost:3000/#/payment-successful',
+//         cancel_url: 'http://localhost:3000/#/payment-canceled',
+//         line_items: [
+//             {
+//                 price_data: {
+//                     currency: 'usd',
+//                     product_data: {
+//                         name: req.body.room_number,
+//                         images: req.body.room_cover_photo_url
+//                     },
+//                     unit_amount: req.body.room_rate
+//                 },
+//                 quantity: req.body.quantity
+                
+//             }
+//         ]
+//     })
+
+//     res.redirect( 303, session.url )
+
+// })
+
 
 
 module.exports = postRouter;
