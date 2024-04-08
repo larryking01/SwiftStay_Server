@@ -19,7 +19,7 @@ const RoomSchema = new Schema({
     },
 
     room_rate: {
-        type: String,
+        type: Number,
         required: true,
         unique: false
     },
@@ -83,13 +83,13 @@ const RoomSchema = new Schema({
         default: [ ]
     },
 
-    room_latitude_coordinate: {
-        type: String,
+    room_latitude: {
+        type: Number,
         required: true
     },
 
-    room_longitude_coordinate: {
-        type: String,
+    room_longitude: {
+        type: Number,
         required: true
     }
 
