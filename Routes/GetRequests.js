@@ -104,7 +104,7 @@ getRouter.get('/fetch-all-staff', ( req, res ) => {
                 res.status(200).json( employees )
             }
             else {
-                res.status(200).json('sorry, no employees added yet....')
+                res.status(200).json('sorry, no employees added yet...')
             }
             }
     })
